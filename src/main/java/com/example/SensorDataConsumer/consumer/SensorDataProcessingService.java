@@ -1,5 +1,6 @@
 package com.example.SensorDataConsumer.consumer;
 
+import com.example.SensorDataConsumer.alert.AlertGenerationService;
 import com.example.SensorDataConsumer.model.SensorData;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,10 @@ import java.util.*;
 public class SensorDataProcessingService {
 
     private final Map<String, List<SensorData>> sensorDataMap;
+    private final AlertGenerationService alertGenerationService;
 
-    public SensorDataProcessingService() {
+    public SensorDataProcessingService(AlertGenerationService alertGenerationService) {
+        this.alertGenerationService = alertGenerationService;
         this.sensorDataMap = new HashMap<>();
     }
 
@@ -24,6 +27,9 @@ public class SensorDataProcessingService {
         removeOldData(sensorId, sensorData.getTimestamp());
 
         double averageTemperature = calculateAverageTemperature(sensorId);
+        if (averageTemperature > 40.0) {
+            alertGenerationService.generateAlert(sensorId, averageTemperature);
+        }
     }
 
     public double calculateAverageTemperature(String sensorId) {
@@ -44,5 +50,9 @@ public class SensorDataProcessingService {
         if (sensorDataList == null) return;
 
         sensorDataList.removeIf(data -> data.getTimestamp().isBefore(currentTimestamp.minusMinutes(5)));
+    }
+
+    private void generateAlert(Double temperature) {
+
     }
 }
