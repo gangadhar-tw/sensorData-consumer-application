@@ -3,10 +3,8 @@ package com.example.SensorDataConsumer.consumer;
 import com.example.SensorDataConsumer.model.SensorData;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class SensorDataProcessingService {
@@ -23,6 +21,8 @@ public class SensorDataProcessingService {
         sensorDataMap.putIfAbsent(sensorId, new ArrayList<>());
         sensorDataMap.get(sensorId).add(sensorData);
 
+        removeOldData(sensorId, sensorData.getTimestamp());
+
         double averageTemperature = calculateAverageTemperature(sensorId);
     }
 
@@ -37,5 +37,12 @@ public class SensorDataProcessingService {
             totalTemperature += data.getTemperature();
         }
         return totalTemperature / sensorDataList.size();
+    }
+
+    private void removeOldData(String sensorId, LocalDateTime currentTimestamp) {
+        List<SensorData> sensorDataList = sensorDataMap.get(sensorId);
+        if (sensorDataList == null) return;
+
+        sensorDataList.removeIf(data -> data.getTimestamp().isBefore(currentTimestamp.minusMinutes(5)));
     }
 }
