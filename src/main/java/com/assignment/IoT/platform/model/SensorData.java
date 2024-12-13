@@ -1,4 +1,4 @@
-package com.example.SensorDataConsumer.model;
+package com.assignment.IoT.platform.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

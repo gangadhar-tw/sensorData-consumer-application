@@ -1,4 +1,4 @@
-package com.example.SensorDataConsumer.alert;
+package com.assignment.IoT.platform.alert;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,7 @@
-package com.example.SensorDataConsumer.consumer;
+package com.assignment.IoT.platform.consumer;
 
-import com.example.SensorDataConsumer.model.SensorData;
+import com.assignment.IoT.platform.model.SensorData;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class SensorDataConsumerService {
         this.processingService = processingService;
     }
 
+    @KafkaListener(topics = "SENSOR_DATA", groupId = "sensor-data-consumer-group")
     public void consumeSensorData(SensorData sensorData) {
         processingService.processSensorData(sensorData);
     }

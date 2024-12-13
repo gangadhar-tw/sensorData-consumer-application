@@ -1,4 +1,4 @@
-package com.example.SensorDataConsumer.alert;
+package com.assignment.IoT.platform.alert;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -16,5 +16,6 @@ public class AlertGenerationService {
     public void generateAlert(String sensorId, double temperature) {
         String message = "Temperature too high for sensor ( id = " + sensorId + ", temperature = " + temperature + ")";
         kafkaTemplate.send(ALERT_TOPIC, message);
+        System.out.println(message);
     }
 }

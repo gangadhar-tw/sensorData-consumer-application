@@ -1,7 +1,7 @@
-package com.example.SensorDataConsumer.consumer;
+package com.assignment.IoT.platform.consumer;
 
-import com.example.SensorDataConsumer.alert.AlertGenerationService;
-import com.example.SensorDataConsumer.model.SensorData;
+import com.assignment.IoT.platform.alert.AlertGenerationService;
+import com.assignment.IoT.platform.model.SensorData;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

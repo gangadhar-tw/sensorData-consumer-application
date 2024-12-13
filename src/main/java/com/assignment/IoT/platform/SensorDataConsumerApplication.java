@@ -1,4 +1,4 @@
-package com.example.SensorDataConsumer;
+package com.assignment.IoT.platform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

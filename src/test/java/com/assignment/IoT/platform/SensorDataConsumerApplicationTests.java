@@ -1,4 +1,4 @@
-package com.example.SensorDataConsumer;
+package com.assignment.IoT.platform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
