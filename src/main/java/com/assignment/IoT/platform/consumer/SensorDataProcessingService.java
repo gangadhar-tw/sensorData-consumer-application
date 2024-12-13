@@ -48,7 +48,6 @@ public class SensorDataProcessingService {
 
     private void removeOldData(String sensorId, LocalDateTime currentTimestamp) {
         List<SensorData> sensorDataList = sensorDataMap.get(sensorId);
-        if (sensorDataList == null) return;
 
         sensorDataList.removeIf(data -> data.getTimestamp().isBefore(currentTimestamp.minusMinutes(5)));
     }

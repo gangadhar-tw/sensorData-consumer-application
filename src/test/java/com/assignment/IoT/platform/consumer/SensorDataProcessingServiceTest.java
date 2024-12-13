@@ -45,6 +45,13 @@ class SensorDataProcessingServiceTest {
     }
 
     @Test
+    void shouldReturnZeroAverageTemperatureWhenSensorDataForThatSensorDoesNotExist() {
+        double sensor1AvgTemp = sensorDataProcessingService.calculateAverageTemperature("1");
+
+        assertThat(sensor1AvgTemp, is(closeTo(0, 0.01)));
+    }
+
+    @Test
     void shouldRemoveOldDataForSpecificSensorAfterFiveMinutesAndConsiderOnlyNewLastFiveMinutesDataForAverageTemperatureCalculation() {
         SensorData oldData = getSensorData("sensor 1", 28.4, 85.0);
         oldData.setTimestamp(LocalDateTime.now().minusMinutes(6));
